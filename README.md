@@ -82,6 +82,10 @@ But: We can't give any guarantee that it works - but it should do (in theory) ;-
    `USE redmine; SOURCE /tmp/dbdump_chiliproject.sql`  
    and run the Redmine database migration:  
    `rake db:migrate RAILS_ENV=production`
+which will fail. Because you already have the table changeset_parents, because running db:migrate was part of the installation instructions. so, remove that 
+
+mysql> drop table changeset_parents;
+
 12. Run the SQL commands described in the *[Chili-to-Redmine guide](https://docs.google.com/document/d/1SPypGY_cBjeXmpDXjFVkrla3a8CsWpps0qIgj-VYJds/)*:  
   
         ALTER TABLE wiki_contents ADD comments VARCHAR(250) NULL, CHANGE COLUMN lock_version version INTEGER(11);
